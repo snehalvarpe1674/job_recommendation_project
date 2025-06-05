@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Job Recommender</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 60px auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 15px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .results {
+            margin-top: 30px;
+        }
+
+        .job {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 5px solid #007bff;
+            border-radius: 6px;
+        }
+
+        .job strong {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Job Recommendation System for Freshers</h2>
+
+        <form method="POST" onsubmit="return validateForm()">
+            <textarea name="resume" id="resume" rows="10" placeholder="Paste your resume here..."></textarea><br>
+            <input type="submit" value="Recommend Jobs">
+        </form>
+
+        <div class="results">
+        {% if recommendations %}
+            <h3>Top Matching Jobs:</h3>
+            {% for job in recommendations %}
+                <div class="job">
+                    <strong>{{ job.Job_Title }}</strong><br>
+                    {{ job.Description }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            const resume = document.getElementById("resume").value.trim();
+            if (resume === "") {
+                alert("Please paste your resume before submitting.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+</body>
+</html>
+
